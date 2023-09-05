@@ -20,12 +20,11 @@ def get_latest_log_name(**kwargs):
                         if 'error' not in f.name]
     except KeyError:
         log_name_lst = [f.name for f in (BASE_DIR / f'logs').iterdir()
-                        if f.is_file()
+                        if f.is_file() and '.log' in f.name
                         if 'error' not in f.name]
 
     if len(log_name_lst) == 0:
         return None
-
     latest_log_datetime = datetime.datetime.fromtimestamp(0)
     latest_log_name = ''
     for log_name in log_name_lst:
